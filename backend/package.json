@@ -1,0 +1,21 @@
+{
+  "name": "pratice-backend",
+  "version": "1.0.0",
+  "description": "just for practcing backend ",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start",
+    "type": "module"
+  },
+  "keywords": [
+    "no",
+    "keywords"
+  ],
+  "author": "Anurag yadav",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1"
+  }
+}
