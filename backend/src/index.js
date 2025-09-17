@@ -1,39 +1,19 @@
-import express from 'express';
-import { Server } from 'socket.io';
-import http from 'http';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-const app = express();
+import http from "http";
+import { Server } from "socket.io";
+import app from "./app.js";
+import { connectDB } from "./config/db.js";
+import { config } from "./config/env.js";
+import { socketAuth, registerChatHandlers } from "./socket/chatEvents.js";
 
-// this to make the socket.io and express to coexist together in the same server
-const server = http.createServer(app)
+const server = http.createServer(app);
+const io = new Server(server, { cors: { origin: "*" } });
 
-const io=new Server(server);
+// Socket.IO auth
+io.use(socketAuth);
+io.on("connection", (socket) => registerChatHandlers(io, socket));
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// middleware to parse json 
-app.use(express.json());
-app.use(express.static(join(__dirname, 'public')));
-
-// socket io 
-io.on("connection", (socket) => {
-    // listen for event message from client 
-  socket.on('message',message=>{
-    console.log('new user message', message);
-    
-    //broadcast to the incoming messages to all connected clients
-    io.emit('message',message);
-  })
-});
-
-app.get('/', async (req, res) => {
-    res.sendFile(join(__dirname, 'public', 'index.html'));
-})
-
-server.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
-})
-
-
+connectDB().then(() =>
+  server.listen(config.port, () =>
+    console.log(`🚀 Server running on port ${config.port}`)
+  )
+);

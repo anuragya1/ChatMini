@@ -3,105 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatmini</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    #chat-box {
-      width: 80%;
-      max-width: 500px;
-      height: 300px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 10px;
-      margin: 20px auto;
-      overflow-y: auto;
-      background: #f9f9f9;
-    }
-    .message {
-      padding: 5px 10px;
-      margin: 5px 0;
-      background: #e1f5fe;
-      border-radius: 6px;
-      word-wrap: break-word;
-    }
-    #controls {
-      width: 80%;
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      gap: 10px;
-    }
-    #message {
-      flex: 1;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    #send {
-      padding: 8px 16px;
-      border: none;
-      background: #2196f3;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    #send:hover {
-      background: #1976d2;
-    }
-  </style>
+  <title>ChatMini
+
+  </title>
 </head>
 <body>
-  <center><h1>Global Chat</h1></center>
-  
-  <!-- Chat messages box -->
-  <div id="chat-box"></div>
-
-  <!-- Input and send button -->
-  <div id="controls">
-    <input type="text" placeholder="Type your message..." id="message" />
-    <button id="send">Send</button>
-  </div>
-
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const send = document.getElementById('send');
-    const messageInput = document.getElementById('message');
-    const chatBox = document.getElementById('chat-box');
-    const socket = io();
-
-    // Show received messages
-    socket.on("message", (m) => {
-      addMessage(m);
-    });
-     
-     // Send message on pressing Enter
-  messageInput.addEventListener('keypress', (e) => {
-    if (e.key === "Enter") {
-      sendMessage();
-    }
-  });
-    // Send message
-    send.addEventListener('click', sendMessage);
-     
-    function sendMessage(){
-          const messag = messageInput.value.trim();
-      if(messag){
-        socket.emit('message', messag);
-        messageInput.value = "";
-      }
-    }
-    // Function to add a message to chat box
-    function addMessage(msg) {
-      const div = document.createElement("div");
-      div.classList.add("message");
-      div.textContent = msg;
-      chatBox.appendChild(div);
-
-      // Auto scroll to bottom
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-  </script>
+  NULLPTR
 </body>
 </html>
