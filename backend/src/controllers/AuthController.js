@@ -9,7 +9,7 @@ export const register = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
-    const token = await authService.loginUser(req.body);
-    res.json({ token });
+    const userData = await authService.loginUser(req.body);
+    res.json({ userData });
   } catch (e) { next(e); }
 };

@@ -17,3 +17,4 @@ const createAuthLimiter = (maxAttempts, action = 'auth') => rateLimit({
 export const registerLimiter = createAuthLimiter(10, 'registration');
 export const loginLimiter = createAuthLimiter(5, 'login');
 export const messageLimiter = createAuthLimiter(60,'messages');
+export const userSearchLimiter = createAuthLimiter(20, 'user searches'); // 20/min
